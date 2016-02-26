@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bookapp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% if user_signed_in? %>
+<nav>
+  <li><%= link_to 'My Profile', user_path(current_user) %></li>
+  <li><%= current_user.email %></li>
+  <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+</nav>
+<% else %>
+  <li>
+  <%= link_to('Login', new_user_session_path)  %>
+  </li>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>
